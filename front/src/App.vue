@@ -26,7 +26,7 @@
                 </div>
                 <div v-if="login">
                     <img
-                        :src="`http://localhost:3000/pictures/${user.picture_extension}`"
+                        :src="`https://api-ovsb.herokuapp.com/pictures/${user.picture_extension}`"
                         class="profilPicture"
                     />
                     <p>Prénom : {{ user.firstname }}</p>

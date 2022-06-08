@@ -28,7 +28,7 @@ export default createStore({
 	},
 	actions: {
 		async fetchUsers({ commit }) {
-			const queryUsers = await fetch("http://localhost:3000/users", {
+			const queryUsers = await fetch("https://api-ovsb.herokuapp.com/users", {
 				headers: {
 					Authorization: localStorage.getItem("user"),
 				},
@@ -38,13 +38,17 @@ export default createStore({
 		},
 
 		async fetchActivities({ commit }) {
-			const queryActivities = await fetch("http://localhost:3000/activities");
+			const queryActivities = await fetch(
+				"https://api-ovsb.herokuapp.com/activities"
+			);
 			const activities = await queryActivities.json();
 			commit("setActivities", activities.activities);
 		},
 
 		async fetchCategories({ commit }) {
-			const queryCategories = await fetch("http://localhost:3000/categories");
+			const queryCategories = await fetch(
+				"https://api-ovsb.herokuapp.com/categories"
+			);
 			const categories = await queryCategories.json();
 			commit("setCategories", categories.categories);
 		},
@@ -57,7 +61,10 @@ export default createStore({
 				},
 				redirect: "follow",
 			};
-			const queryComments = await fetch("http://localhost:3000/comments", requestOptions);
+			const queryComments = await fetch(
+				"https://api-ovsb.herokuapp.com/comments",
+				requestOptions
+			);
 			const comments = await queryComments.json();
 			commit("setComments", comments.comments);
 		},
@@ -75,13 +82,13 @@ export default createStore({
 				redirect: "follow",
 			};
 
-			fetch("http://localhost:3000/login", requestOptions)
+			fetch("https://api-ovsb.herokuapp.com/login", requestOptions)
 				.then((response) => response.json())
 				.then((result) => {
 					state.currentUser.token = "Bearer " + result.access_token;
 					localStorage.setItem("user", "Bearer " + result.access_token);
 				})
-				.then(() => dispatch('setCurrentUser'))
+				.then(() => dispatch("setCurrentUser"))
 				.catch((error) => console.log("error", error));
 		},
 
@@ -94,12 +101,15 @@ export default createStore({
 				redirect: "follow",
 			};
 
-			const request = await fetch("http://localhost:3000/me", requestOptions);
+			const request = await fetch(
+				"https://api-ovsb.herokuapp.com/me",
+				requestOptions
+			);
 			const user = await request.json();
 			state.currentUser.admin = await user.admin;
 			state.currentUser.id = await user.id;
 			const searchUser = await fetch(
-				"http://localhost:3000/users/" + state.currentUser?.id,
+				"https://api-ovsb.herokuapp.com/users/" + state.currentUser?.id,
 				{
 					method: "GET",
 					headers: {
@@ -124,7 +134,7 @@ export default createStore({
 				method: "POST",
 				body: formData,
 			};
-			fetch("http://localhost:3000/users", requestOptions)
+			fetch("https://api-ovsb.herokuapp.com/users", requestOptions)
 				.then((response) => response.json())
 				.then(() => dispatch("fetchUsers"))
 				.catch((error) => console.log("error", error));
@@ -151,7 +161,7 @@ export default createStore({
 				}),
 				redirect: "follow",
 			};
-			fetch("http://localhost:3000/users/" + _id, requestOptions)
+			fetch("https://api-ovsb.herokuapp.com/users/" + _id, requestOptions)
 				.then((response) => response.json())
 				.then(() => dispatch("fetchUsers"))
 				.catch((error) => console.log("error", error));
@@ -169,7 +179,7 @@ export default createStore({
 				}),
 				redirect: "follow",
 			};
-			fetch("http://localhost:3000/users/" + _id, requestOptions)
+			fetch("https://api-ovsb.herokuapp.com/users/" + _id, requestOptions)
 				.then((response) => response.json())
 				.then(() => dispatch("fetchUsers"))
 				.catch((error) => console.log("error", error));
@@ -183,7 +193,7 @@ export default createStore({
 				},
 				body: formData,
 			};
-			fetch("http://localhost:3000/users/" + _id, requestOptions)
+			fetch("https://api-ovsb.herokuapp.com/users/" + _id, requestOptions)
 				.then((response) => response.json())
 				.then(() => dispatch("fetchUsers"))
 				.catch((error) => console.log("error", error));
@@ -197,7 +207,7 @@ export default createStore({
 					Authorization: localStorage.getItem("user"),
 				},
 			};
-			fetch("http://localhost:3000/users/" + id, requestOptions)
+			fetch("https://api-ovsb.herokuapp.com/users/" + id, requestOptions)
 				.then(() => dispatch("fetchUsers"))
 				.catch((error) => console.log("error", error));
 		},
@@ -223,7 +233,7 @@ export default createStore({
 				}),
 				redirect: "follow",
 			};
-			fetch("http://localhost:3000/activities", requestOptions)
+			fetch("https://api-ovsb.herokuapp.com/activities", requestOptions)
 				.then((response) => response.json())
 				.then(() => dispatch("fetchActivities"))
 				.catch((error) => console.log("error", error));
@@ -249,7 +259,7 @@ export default createStore({
 				}),
 				redirect: "follow",
 			};
-			fetch("http://localhost:3000/activities/" + _id, requestOptions)
+			fetch("https://api-ovsb.herokuapp.com/activities/" + _id, requestOptions)
 				.then((response) => response.json())
 				.then(() => dispatch("fetchActivities"))
 				.catch((error) => console.log("error", error));
@@ -264,7 +274,7 @@ export default createStore({
 					Authorization: localStorage.getItem("user"),
 				},
 			};
-			fetch("http://localhost:3000/activities/" + _id, requestOptions)
+			fetch("https://api-ovsb.herokuapp.com/activities/" + _id, requestOptions)
 				.then(() => dispatch("fetchActivities"))
 				.catch((error) => console.log("error", error));
 		},
@@ -281,7 +291,7 @@ export default createStore({
 				}),
 				redirect: "follow",
 			};
-			fetch("http://localhost:3000/categories", requestOptions)
+			fetch("https://api-ovsb.herokuapp.com/categories", requestOptions)
 				.then((response) => response.json())
 				.then(() => dispatch("fetchCategories"))
 				.catch((error) => console.log("error", error));
@@ -299,7 +309,7 @@ export default createStore({
 				}),
 				redirect: "follow",
 			};
-			fetch("http://localhost:3000/categories/" + _id, requestOptions)
+			fetch("https://api-ovsb.herokuapp.com/categories/" + _id, requestOptions)
 				.then((response) => response.json())
 				.then(() => dispatch("fetchCategories"))
 				.catch((error) => console.log("error", error));
@@ -314,7 +324,7 @@ export default createStore({
 					Authorization: localStorage.getItem("user"),
 				},
 			};
-			fetch("http://localhost:3000/categories/" + _id, requestOptions)
+			fetch("https://api-ovsb.herokuapp.com/categories/" + _id, requestOptions)
 				.then(() => dispatch("fetchCategories"))
 				.catch((error) => console.log("error", error));
 		},
@@ -333,7 +343,7 @@ export default createStore({
 				}),
 				redirect: "follow",
 			};
-			fetch("http://localhost:3000/comments", requestOptions)
+			fetch("https://api-ovsb.herokuapp.com/comments", requestOptions)
 				.then((response) => response.json())
 				.then(() => dispatch("fetchComments"))
 				.catch((error) => console.log("error", error));
@@ -351,7 +361,7 @@ export default createStore({
 				}),
 				redirect: "follow",
 			};
-			fetch("http://localhost:3000/comments/" + _id, requestOptions)
+			fetch("https://api-ovsb.herokuapp.com/comments/" + _id, requestOptions)
 				.then((response) => response.json())
 				.then(() => dispatch("fetchComments"))
 				.catch((error) => console.log("error", error));
@@ -366,7 +376,7 @@ export default createStore({
 					Authorization: localStorage.getItem("user"),
 				},
 			};
-			fetch("http://localhost:3000/comments/" + _id, requestOptions)
+			fetch("https://api-ovsb.herokuapp.com/comments/" + _id, requestOptions)
 				.then(() => dispatch("fetchComments"))
 				.catch((error) => console.log("error", error));
 		},
