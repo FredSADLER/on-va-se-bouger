@@ -71,7 +71,6 @@ export default {
         this.$store.dispatch("fetchUsers"),
             this.$store.dispatch("fetchActivities"),
             this.$store.dispatch("fetchCategories"),
-            this.$store.dispatch("fetchComments"),
             this.$store.dispatch("setCurrentUser");
     },
     computed: {
