@@ -4,55 +4,51 @@
             <router-link :to="{ name: 'home' }">
                 <img src="./assets/064635.png" />
             </router-link>
-            <router-link
-                :to="{ name: 'newActivity' }"
-                class="btn btn-outline-dark"
-                >Post New Activity</router-link
-            >
+            <router-link :to="{ name: 'newActivity' }" class="btn btn-outline-dark">Post New Activity</router-link>
         </header>
         <div class="container d-flex justify-content-left">
             <aside>
                 <div v-if="!login">
-                    <router-link
-                        :to="{ name: 'login' }"
-                        class="btn btn-outline-secondary"
-                        >Se connecter</router-link
-                    ><br />
+                    <router-link 
+                        :to="{ name: 'login' }" 
+                        class="btn btn-outline-secondary">
+                            Se connecter
+                    </router-link><br />
                     <router-link
                         :to="{ name: 'register' }"
-                        class="btn btn-outline-secondary"
-                        >S'enregistrer</router-link
-                    >
+                        class="btn btn-outline-secondary">
+                            S'enregistrer
+                    </router-link>
                 </div>
                 <div v-if="login">
-                    <img
-                        :src="`https://api-ovsb.herokuapp.com/pictures/${user.picture_extension}`"
-                        class="profilPicture"
-                    />
+                    <img :src="`https://api-ovsb.herokuapp.com/pictures/${user.picture_extension}`"
+                        class="profilPicture" />
                     <p>Prénom : {{ user.firstname }}</p>
                     <p>Nom : {{ user.lastname }}</p>
                     <p>Genre : {{ user.gender }}</p>
                     <p>Date de naissance : {{ user.birthdate }}</p>
                     <p>Email : {{ user.email }}</p>
                     <p>Description : {{ user.description }}</p>
-                    <router-link
-                        :to="{ name: 'espacePerso' }"
-                        class="btn btn-outline-secondary"
-                        >Mes activités</router-link
-                    ><br />
-                    <router-link
-                        :to="{ name: 'editProfile' }"
-                        class="btn btn-outline-secondary"
-                        >Modifier mon profil</router-link
-                    ><br />
-                    <router-link
-                        :to="{ name: 'admin' }"
-                        v-if="user.admin === 1"
-                        class="btn btn-outline-secondary"
-                        >Admin center</router-link
-                    ><br />
-                    <button @click="logout" class="btn btn-outline-dark">
-                        Se déconnecter
+                    <router-link 
+                        :to="{ name: 'espacePerso' }" 
+                        class="btn btn-outline-secondary">
+                            Mes activités
+                    </router-link><br />
+                    <router-link 
+                        :to="{ name: 'editProfile' }" 
+                        class="btn btn-outline-secondary">
+                            Modifier mon profil
+                    </router-link><br />
+                    <router-link 
+                        :to="{ name: 'admin' }" 
+                        v-if="user.admin === 1" 
+                        class="btn btn-outline-secondary">
+                            Admin center
+                    </router-link><br />
+                    <button 
+                        @click="logout" 
+                        class="btn btn-outline-dark">
+                            Se déconnecter
                     </button>
                 </div>
             </aside>
@@ -71,6 +67,7 @@ export default {
         this.$store.dispatch("fetchUsers"),
             this.$store.dispatch("fetchActivities"),
             this.$store.dispatch("fetchCategories"),
+            this.$store.dispatch("fetchComments"),
             this.$store.dispatch("setCurrentUser");
     },
     computed: {
@@ -91,9 +88,6 @@ export default {
 </script>
 
 <style>
-p {
-    color: #064635;
-}
 header {
     display: flex;
     justify-content: space-between;

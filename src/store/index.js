@@ -38,17 +38,13 @@ export default createStore({
 		},
 
 		async fetchActivities({ commit }) {
-			const queryActivities = await fetch(
-				"https://api-ovsb.herokuapp.com/activities"
-			);
+			const queryActivities = await fetch("https://api-ovsb.herokuapp.com/activities");
 			const activities = await queryActivities.json();
 			commit("setActivities", activities.activities);
 		},
 
 		async fetchCategories({ commit }) {
-			const queryCategories = await fetch(
-				"https://api-ovsb.herokuapp.com/categories"
-			);
+			const queryCategories = await fetch("https://api-ovsb.herokuapp.com/categories");
 			const categories = await queryCategories.json();
 			commit("setCategories", categories.categories);
 		},
@@ -61,10 +57,7 @@ export default createStore({
 				},
 				redirect: "follow",
 			};
-			const queryComments = await fetch(
-				"https://api-ovsb.herokuapp.com/comments",
-				requestOptions
-			);
+			const queryComments = await fetch("https://api-ovsb.herokuapp.com/comments", requestOptions);
 			const comments = await queryComments.json();
 			commit("setComments", comments.comments);
 		},
@@ -88,7 +81,7 @@ export default createStore({
 					state.currentUser.token = "Bearer " + result.access_token;
 					localStorage.setItem("user", "Bearer " + result.access_token);
 				})
-				.then(() => dispatch("setCurrentUser"))
+				.then(() => dispatch('setCurrentUser'))
 				.catch((error) => console.log("error", error));
 		},
 
@@ -101,10 +94,7 @@ export default createStore({
 				redirect: "follow",
 			};
 
-			const request = await fetch(
-				"https://api-ovsb.herokuapp.com/me",
-				requestOptions
-			);
+			const request = await fetch("https://api-ovsb.herokuapp.com/me", requestOptions);
 			const user = await request.json();
 			state.currentUser.admin = await user.admin;
 			state.currentUser.id = await user.id;

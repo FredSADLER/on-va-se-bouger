@@ -36,8 +36,6 @@ export default {
         async login() {
             let email = document.getElementById('floatingInput').value;
             let password = document.getElementById('floatingPassword').value;
-            localStorage.setItem('user', 'logged');
-            
             await this.$store.dispatch('login', { email, password })
                 .then(() => this.$router.push({ name: 'home' }))
         },

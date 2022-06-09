@@ -6,24 +6,24 @@
                 <option value="">Toutes</option>
                 <option
                     v-for="cat in categories"
-                    :key="cat._id"
-                    :value="cat._id"
+                    :key="cat?._id"
+                    :value="cat?._id"
                 >
-                    {{ cat.category_name }}
+                    {{ cat?.category_name }}
                 </option>
             </select>
         </p>
         <PostedActivity
-            v-for="activity in filteredActivities.reverse()"
-            :key="activity._id"
-            :id="activity._id"
-            :title="activity.title"
-            :description="activity.description"
-            :category_id="activity.category_id"
-            :date="activity.date"
-            :time="activity.time"
-            :duration="activity.duration"
-            :user_id="activity.user_id"
+            v-for="activity in filteredActivities"
+            :key="activity?._id"
+            :id="activity?._id"
+            :title="activity?.title"
+            :description="activity?.description"
+            :category_id="activity?.category_id"
+            :date="activity?.date"
+            :time="activity?.time"
+            :duration="activity?.duration"
+            :user_id="activity?.user_id"
         />
     </div>
 </template>
